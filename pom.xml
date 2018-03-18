@@ -8,5 +8,12 @@
     <artifactId>algorithms</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>www.algs4.com</groupId>
+            <artifactId>algs4</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
