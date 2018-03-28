@@ -44,6 +44,43 @@ public class ChooseSort {
         }
     }
 
+    private static Comparable[] aux;
+
+    // 原地归并
+    public static void merge(Comparable[] a, int lo, int mid, int hi){
+        int i = lo, j = mid+1;
+        for (int k = lo; k <= hi ; k++) {
+            aux[k] = a[k];
+        }
+
+        for (int k = lo; k <= hi ; k++) {
+            if(i>mid){
+                a[k] = aux[j++];
+            }else if(j>hi){
+                a[k] = aux[i++];
+            }else if(less(aux[j], aux[i])){
+                a[k] = aux[j++];
+            }else{
+                a[k] = aux[i++];
+            }
+        }
+    }
+
+    // 自顶向下的归并排序
+    public static void mergeSort(Comparable[] a){
+        aux = new Comparable[a.length];
+        mergeSort(a, 0, a.length-1);
+    }
+
+    public static void mergeSort(Comparable[] a, int lo, int hi){
+        if(hi <= lo) return;
+        int mid = lo + (hi-lo)/2;
+        mergeSort(a, lo, mid);
+        mergeSort(a, mid+1, hi);
+        merge(a, lo, mid, hi);
+    }
+
+
     private static boolean less(Comparable v, Comparable w) {
         return v.compareTo(w) < 0;
     }
@@ -74,7 +111,8 @@ public class ChooseSort {
         show(a);
 //        sort(a);
 //        insetSort(a);
-        shellSort(a);
+//        shellSort(a);
+        mergeSort(a);
         System.out.println(isSorted(a));
         show(a);
     }
